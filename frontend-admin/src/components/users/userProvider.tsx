@@ -54,6 +54,7 @@ export default function UserProvider(props: any) {
     removeLocalStorage("userId")
     setUserId(null)
     setIsLogged(false)
+    dispatch(addNotification("Vous êtes déconnecté !", true))
   }
 
   useEffect(() => {
