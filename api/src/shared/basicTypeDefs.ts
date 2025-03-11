@@ -18,7 +18,9 @@ const basicTypeDefs = gql`
     errors: [Error]!
   }
 
-  type Query
+  type Query {
+     helloFresh: String
+   }
   type Mutation
 `
 export default basicTypeDefs
