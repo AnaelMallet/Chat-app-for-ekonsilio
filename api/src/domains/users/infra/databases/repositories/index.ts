@@ -1,4 +1,4 @@
-import { UserTestRepository } from "./usertestRepository"
+import { UserTestRepository } from "./userTestRepository"
 
 const userTestRepository = new UserTestRepository()
 

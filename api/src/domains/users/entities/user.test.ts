@@ -95,6 +95,22 @@ describe("test the user entity", () => {
     expect(userErrors.length).toBe(1)
     expect(userErrors[0].message).toBe("againstNullOrUndefined")
   })
+
+  test("Should not create an user because isGenius is undefined", () => {
+    const props = {...userProps}
+  
+    props.isGenius = undefined
+  
+    const userResult = User.create(props)
+  
+    expect(userResult.isSuccess).toBe(false)
+    expect(userResult.values).toBe(undefined)
+  
+    const userErrors = userResult.getErrors()
+  
+    expect(userErrors.length).toBe(1)
+    expect(userErrors[0].message).toBe("againstNullOrUndefined")
+  })
   
   test("Should not create an user because password is undefined", () => {
     const props = {...userProps}
