@@ -3,7 +3,6 @@ import {
   Column, 
   CreateDateColumn,
   Entity,
-  OneToMany,
   PrimaryColumn,
   UpdateDateColumn
 } from "typeorm"
@@ -23,8 +22,8 @@ export default class UserEntity extends BaseEntity {
   @Column("varchar", { length: 64 })
   email: string
 
-  @Column("varchar", { length : 32, nullable: true })
-  username: string
+  @Column("bool", { nullable: false })
+  isGenius: boolean
 
   @Column("varchar", { length: 64 })
   password: string
