@@ -21,8 +21,57 @@ const typeDefs = gql`
     confirmationPassword: String!
   }
 
+  input LoginInput {
+    login: String!
+    password: String!
+    isGenius: Boolean!
+  }
+
+  type LoginResponseData {
+    userId: String!
+    accessToken: String!
+  }
+
+  type LoginResponse implements QueryResponse {
+    code: Int!,
+    isSuccess: Boolean!
+    errors: [Error]!
+    values: LoginResponseData
+  }
+
+  type TokenResponseData {
+    accessToken: String
+  }
+
+  type TokenResponse implements QueryResponse {
+    code: Int!,
+    isSuccess: Boolean!
+    errors: [Error]!
+    values: TokenResponseData
+  }
+
+  type UserData {
+    firstname: String!
+    lastname: String!
+    email: String!
+    isGenius: Boolean!
+  }
+
+  type UserResponse implements QueryResponse {
+    code: Int!,
+    isSuccess: Boolean!
+    errors: [Error]!
+    values: UserData
+  }
+
   extend type Mutation {
     createUser(input: UserInput!): MutationResponse!
+    login(input: LoginInput!): LoginResponse!
+    verifyToken(userId: String!): TokenResponse!
+  }
+
+  extend type Query {
+    me(userId: String): UserResponse!
   }
 `
 
