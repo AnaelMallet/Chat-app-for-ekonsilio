@@ -5,9 +5,10 @@ import { Field, Form, Formik } from "formik"
 import classNames from "classnames"
 import { useMutation } from "@apollo/client"
 
-import { addNotification, useNotification } from "../../components/notifications/NotificationProvider"
-import { setLocalStorage } from "../../components/utils"
-import { useUser } from "../../components/users/userProvider"
+import { addNotification, useNotification } from "@front-shared/src/components/notifications/NotificationProvider"
+import { setLocalStorage } from "@front-shared/src/components/utils"
+import { useUser } from "@front-shared/src/components/users/userProvider"
+
 import TextTitle from "../../components/text"
 
 import client from "../graphql-api"

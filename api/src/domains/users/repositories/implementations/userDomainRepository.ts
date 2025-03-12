@@ -40,13 +40,6 @@ export class UserDomainRepository implements IUserDomainRepository {
       return domainUsers
   }
 
-  async findAllVisitors(): Promise<Result<User[]>> {
-    const entityUsers = await this.repository.findAllVisitors()
-    const domainUsers = userTransformer.arrayToDomain(entityUsers)
-    
-    return domainUsers
-}
-
   async save(props: User): Promise<void> {
     const user = userTransformer.toDatabase(props)
 

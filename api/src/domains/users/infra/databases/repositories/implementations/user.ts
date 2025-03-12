@@ -28,13 +28,6 @@ export class UserRepository extends BasicRepository<User> implements IUserReposi
         .getMany()
   }
 
-  async findAllVisitors(): Promise<User[]> {
-    return await this.repository
-      .createQueryBuilder(this.alias)
-      .where(`${this.alias}.isGenius = false`)
-      .getMany()
-  }
-
   async save(entity: User): Promise<void> {
       await this.repository.save(entity)
   }

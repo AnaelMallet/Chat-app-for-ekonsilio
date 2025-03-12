@@ -5,6 +5,7 @@ import { loginUserController } from "../../use-cases/login"
 import { userVerifyTokenController } from "../../use-cases/verifyToken"
 import { userMeController } from "../../use-cases/me"
 import { updateUserController } from "../../use-cases/updateUser"
+import { getGeniusUserController } from "../../use-cases/getGeniusUsers"
 
 const resolvers = {
   Mutation: {
@@ -59,6 +60,9 @@ const resolvers = {
       }
   
       return await userMeController.executeImplementation(props)
+    },
+    getGeniusUsers: async () => {
+      return await getGeniusUserController.executeImplementation()
     }
   }
 }
