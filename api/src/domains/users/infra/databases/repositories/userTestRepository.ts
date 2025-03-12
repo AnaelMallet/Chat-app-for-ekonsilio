@@ -37,12 +37,6 @@ export class UserTestRepository implements IUserDomainRepository {
       return Promise.resolve(Result.ok(foundGeniusUsers))
   }
 
-  findAllVisitors(): Promise<Result<User[]>> {
-    const foundGeniusUsers = this.array.filter(user => !user.isGenius)
-
-    return Promise.resolve(Result.ok(foundGeniusUsers))
-  }
-
   save(props: any): Promise<void> {
     this.array.push(props)
 

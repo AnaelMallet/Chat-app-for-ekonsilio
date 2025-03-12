@@ -72,6 +72,19 @@ const typeDefs = gql`
     password: String
   }
 
+  type GeniusUserData {
+    uuid: ID!
+    firstname: String!
+    lastname: String!
+  }
+
+  type GeniusUserResponse implements QueryResponse {
+    code: Int!,
+    isSuccess: Boolean!
+    errors: [Error]!
+    values: [GeniusUserData]!
+  }
+
   extend type Mutation {
     createUser(input: UserInput!): MutationResponse!
     login(input: LoginInput!): LoginResponse!
@@ -81,6 +94,7 @@ const typeDefs = gql`
 
   extend type Query {
     me(userId: String): UserResponse!
+    getGeniusUsers: GeniusUserResponse!
   }
 `
 

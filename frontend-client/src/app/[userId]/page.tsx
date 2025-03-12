@@ -1,16 +1,18 @@
 'use client'
 
-import TextTitle from "@/components/text"
-import { useUser } from "@/components/users/userProvider"
 import { useMutation } from "@apollo/client"
-import { addNotification, useNotification } from "@/components/notifications/NotificationProvider"
 import { Field, Form, Formik } from "formik"
 import classNames from "classnames"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import * as Yup from "yup"
 
-import { CrossIconSVG, EditIconSVG } from "../svg"
+import { useUser } from "@front-shared/src/components/users/userProvider"
+import { addNotification, useNotification } from "@front-shared/src/components/notifications/NotificationProvider"
+import { CrossIconSVG, EditIconSVG } from "@front-shared/src/app/svg"
+
+import TextTitle from "../../components/text"
+
 import client from "../graphql-api"
 
 import { updateUserMutation } from "./graphql"

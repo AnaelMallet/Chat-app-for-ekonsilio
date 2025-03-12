@@ -5,7 +5,7 @@ import { Form, Formik, Field } from "formik"
 import classNames from "classnames"
 import { useMutation } from "@apollo/client"
 
-import { addNotification, useNotification } from "../../components/notifications/NotificationProvider"
+import { addNotification, useNotification } from "@front-shared/src/components/notifications/NotificationProvider"
 import TextTitle from "../../components/text"
 
 import client from "../graphql-api"

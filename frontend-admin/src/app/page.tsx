@@ -3,8 +3,10 @@
 import { useRouter } from 'next/navigation'
 import { ApolloProvider } from '@apollo/client'
 
-import NotificationProvider from '../components/notifications/NotificationProvider'
-import UserProvider, { useUser } from "../components/users/userProvider"
+import NotificationProvider from "@front-shared/src/components/notifications/NotificationProvider"
+import UserProvider, { useUser } from "@front-shared/src/components/users/userProvider"
+
+import Sidebar from '../components/sidebar'
 
 import client from "./graphql-api"
 
@@ -32,6 +34,7 @@ function Home() {
 
   return (
     <>
+      <Sidebar />
       <div className="absolute inline space-x-4 right-0 m-5 text-white">
         {!isLogged || !user ?
           <>
