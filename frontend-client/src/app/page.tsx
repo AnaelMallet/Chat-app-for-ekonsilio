@@ -36,11 +36,11 @@ function Home() {
         {!isLogged || !user ?
           <>
             <button onClick={() => router.push("/login")} className="bg-[#282c34] font-bold rounded-md p-2">Se connecter</button>
-            <button onClick={() => router.push("/register")} className="bg-cyan-400 font-bold hover:bg-cyan-500 rounded-md p-2">S'inscrire</button>
+            <button onClick={() => router.push("/register")} className="bg-purple-600 font-bold hover:bg-purple-700 rounded-md p-2">S'inscrire</button>
           </>
           :
           <>
-            <button onClick={() => router.push(`/${userId}`)} className="bg-cyan-400 font-bold hover:bg-cyan-500 rounded-md p-2">Bonjour {user.firstname} {user.lastname}</button>
+            <button onClick={() => router.push(`/${userId}`)} className="bg-purple-600 font-bold hover:bg-purple-700 rounded-md p-2">Bonjour {user.firstname} {user.lastname}</button>
             <button onClick={() => logout()} className="bg-[#282c34] font-bold rounded-md p-2">Se déconnecter</button>
           </>
         }

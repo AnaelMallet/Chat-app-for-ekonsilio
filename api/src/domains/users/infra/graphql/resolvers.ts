@@ -4,6 +4,7 @@ import { createUserController } from "../../use-cases/createUser"
 import { loginUserController } from "../../use-cases/login"
 import { userVerifyTokenController } from "../../use-cases/verifyToken"
 import { userMeController } from "../../use-cases/me"
+import { updateUserController } from "../../use-cases/updateUser"
 
 const resolvers = {
   Mutation: {
@@ -36,7 +37,17 @@ const resolvers = {
       }
   
       return await userVerifyTokenController.executeImplementation(props)
-    }
+    },
+    updateUser: async (parent: any, args: any, context: any, info: any) => {
+      const props: graphqlProps = {
+        parent,
+        args,
+        context,
+        info
+      }
+
+      return await updateUserController.executeImplementation(props)
+    },
   },
   Query: {
     me: async (parent: any, args: any, context: any, info: any) => {
