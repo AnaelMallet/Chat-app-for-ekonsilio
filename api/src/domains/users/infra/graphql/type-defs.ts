@@ -64,10 +64,19 @@ const typeDefs = gql`
     values: UserData
   }
 
+  input UserUpdateInput {
+    uuid: ID!
+    firstname: String
+    lastname: String
+    email: String
+    password: String
+  }
+
   extend type Mutation {
     createUser(input: UserInput!): MutationResponse!
     login(input: LoginInput!): LoginResponse!
     verifyToken(userId: String!): TokenResponse!
+    updateUser(input: UserUpdateInput!): MutationResponse! @requireAuth
   }
 
   extend type Query {
