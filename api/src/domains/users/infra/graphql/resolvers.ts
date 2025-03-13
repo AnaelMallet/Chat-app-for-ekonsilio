@@ -61,8 +61,15 @@ const resolvers = {
   
       return await userMeController.executeImplementation(props)
     },
-    getGeniusUsers: async () => {
-      return await getGeniusUserController.executeImplementation()
+    getGeniusUsers: async (parent: any, args: any, context: any, info: any) => {
+      const props: graphqlProps = {
+        parent,
+        args,
+        context,
+        info
+      }
+
+      return await getGeniusUserController.executeImplementation(props)
     }
   }
 }
