@@ -2,10 +2,9 @@ import { createContext, Dispatch, SetStateAction, useContext, useEffect, useStat
 import { useRouter } from "next/navigation"
 import { ApolloQueryResult, OperationVariables, useMutation, useQuery } from "@apollo/client"
 
-import client from "../graphql-api"
-
 import { getLocalStorage, removeLocalStorage } from "../utils"
 import { addNotification, useNotification } from "../notifications/NotificationProvider"
+import client from "../graphql-api"
 
 import { getMeQuery, verifyTokenMutation } from "./graphql"
 
@@ -53,7 +52,7 @@ export default function UserProvider(props: any) {
 
   const logout = () => {
     removeLocalStorage("userId")
-    removeLocalStorage("geniusUserUuid")
+    removeLocalStorage("selectedConversationUserId")
     setUserId(null)
     setIsLogged(false)
     dispatch(addNotification("Vous êtes déconnecté !", true))

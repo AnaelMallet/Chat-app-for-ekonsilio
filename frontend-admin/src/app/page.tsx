@@ -3,9 +3,8 @@
 import { useRouter } from 'next/navigation'
 import { ApolloProvider } from '@apollo/client'
 
-import NotificationProvider from "@front-shared/src/components/notifications/NotificationProvider"
-import UserProvider, { useUser } from "@front-shared/src/components/users/userProvider"
-
+import NotificationProvider from "../components/notifications/NotificationProvider"
+import UserProvider, { useUser } from "../components/users/userProvider"
 import Sidebar from '../components/sidebar'
 
 import client from "./graphql-api"

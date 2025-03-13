@@ -16,8 +16,8 @@ export class GetGeniusUserUseCase implements BasicUseCase {
     this.repository = repository
   }
 
-  async execute(): Promise<Result<geniusUserInfo[]>> {
-    const allGeniusUserResult = await this.repository.findAllGenius()
+  async execute(userId: string): Promise<Result<geniusUserInfo[]>> {
+    const allGeniusUserResult = await this.repository.findAllGenius(userId)
     const geniusUserLists: geniusUserInfo[] = []
 
     for (const geniusUser of allGeniusUserResult.getValue()) {

@@ -94,7 +94,7 @@ const typeDefs = gql`
 
   extend type Query {
     me(userId: String): UserResponse!
-    getGeniusUsers: GeniusUserResponse!
+    getGeniusUsers: GeniusUserResponse! @requireAuth
   }
 `
 

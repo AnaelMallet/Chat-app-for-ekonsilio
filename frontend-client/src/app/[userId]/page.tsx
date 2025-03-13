@@ -7,10 +7,9 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import * as Yup from "yup"
 
-import { useUser } from "@front-shared/src/components/users/userProvider"
-import { addNotification, useNotification } from "@front-shared/src/components/notifications/NotificationProvider"
-import { CrossIconSVG, EditIconSVG } from "@front-shared/src/app/svg"
-
+import { useUser } from "../../components/users/userProvider"
+import { addNotification, useNotification } from "../../components/notifications/NotificationProvider"
+import { CrossIconSVG, EditIconSVG } from "../../components/svg"
 import TextTitle from "../../components/text"
 
 import client from "../graphql-api"
