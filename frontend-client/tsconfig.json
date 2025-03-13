@@ -22,6 +22,6 @@
       "@front-shared/*": ["../frontend-shared/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "../frontend-shared/src/app/svg.tsx", "../frontend-shared/src/app/utils.ts", "src/app/graphql-api.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
