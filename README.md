@@ -32,24 +32,21 @@
   #### Stack de test
 
     - Jest
-    - Playwright
-    - CucumberJS
 
 ## Tâches
 
   #### Genius
 
-  - [ ] Permettre l'inscription d'un utilisateur Genius.
-  - [ ] Permettre la connexion d'un utilisateur Genius.
-  - [ ] Permettre à l'utilisateur Genius de modifier ses données personnelles.
-  - [ ] Permettre à l'utilisateur Genius de voir ses conversations (les prises de contacts par un utilisateur visiteur).
-  - [ ] Permettre à l'utilisateur Genius de rejoindre une conversation.
-  - [ ] Permettre à l'utilisateur Genius d'envoyer des messages dans la conversation.
+  - [X] Permettre l'inscription d'un utilisateur Genius.
+  - [X] Permettre la connexion d'un utilisateur Genius.
+  - [X] Permettre à l'utilisateur Genius de modifier ses données personnelles.
+  - [X] Permettre à l'utilisateur Genius de votre les autres utilisateurs de la plateforme.
+  - [X] Permettre à l'utilisateur Genius d'envoyer des messages dans la conversation.
 
   #### Visiteur
 
-  - [ ] Permettre l'inscription d'un utilisateur Visiteur.
-  - [ ] Permettre la connexion d'un utilisateur Visiteur.
-  - [ ] Permettre à l'utilisateur Visiteur de modifier ses données personnelles.
-  - [ ] Permettre à l'utilisateur Visiteur de voir tout les genius disponible.
-  - [ ] Permettre à l'utilisateur Visiteur d'envoyer des messages à un utilisateur Genius.
+  - [X] Permettre l'inscription d'un utilisateur Visiteur.
+  - [X] Permettre la connexion d'un utilisateur Visiteur.
+  - [X] Permettre à l'utilisateur Visiteur de modifier ses données personnelles.
+  - [X] Permettre à l'utilisateur Visiteur de votre les autres utilisateurs de la plateforme.
+  - [X] Permettre à l'utilisateur Visiteur d'envoyer des messages dans la conversation.
