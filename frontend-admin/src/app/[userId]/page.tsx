@@ -114,8 +114,6 @@ function UserPage() {
             const response = await mutateFunction({ variables: { input: sendValues } })
             const responseErrors = response.data.updateUser.errors
 
-            console.log(response.data.updateUser)
-
             if (responseErrors.length > 0) {
               dispatch(addNotification(responseErrors[0].message, false))
             } else {

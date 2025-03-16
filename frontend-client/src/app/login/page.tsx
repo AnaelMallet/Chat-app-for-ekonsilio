@@ -7,7 +7,6 @@ import { useMutation } from "@apollo/client"
 
 import { addNotification, useNotification } from "../../components/notifications/NotificationProvider"
 import { setLocalStorage } from "../../components/utils"
-import { useUser } from "../../components/users/userProvider"
 import TextTitle from "../../components/text"
 
 import client from "../graphql-api"
@@ -19,7 +18,6 @@ function LoginPage() {
   const router = useRouter()
   const [mutateFunction, { loading }] = useMutation(loginUserMutation, { client })
   const { dispatch } = useNotification()
-  const { setAccessToken } = useUser()
 
   return (
     <main className="h-screen flex place-items-center place-content-center">
@@ -41,7 +39,7 @@ function LoginPage() {
                 const accessToken = response.data.login.values.accessToken
 
                 setLocalStorage("userId", userId)
-                setAccessToken(accessToken)
+                setLocalStorage("token", accessToken)
                 
                 location.replace("/")
               }

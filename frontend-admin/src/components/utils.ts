@@ -2,6 +2,7 @@
 
 function setLocalStorage(name: string, value: string) {
   localStorage.setItem(name, value)
+  window.dispatchEvent(new Event('storage'))
 }
 
 function getLocalStorage(name: string) {
@@ -9,7 +10,8 @@ function getLocalStorage(name: string) {
 }
 
 function removeLocalStorage(name: string) {
-  return localStorage.removeItem(name)
+  localStorage.removeItem(name)
+  window.dispatchEvent(new Event('storage'))
 }
 
 export {

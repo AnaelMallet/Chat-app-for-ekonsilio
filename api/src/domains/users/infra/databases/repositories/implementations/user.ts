@@ -21,11 +21,12 @@ export class UserRepository extends BasicRepository<User> implements IUserReposi
         .getOne()
   }
 
-  async findAllGenius(userId: string): Promise<User[]> {
+  async findAllOthers(userId: string): Promise<User[]> {
       return await this.repository
         .createQueryBuilder(this.alias)
-        .where(`${this.alias}.isGenius = true`)
         .andWhere(`${this.alias}.uuid != :userId`, { userId })
+        .orderBy(`${this.alias}.firstname`, "ASC")
+        .addOrderBy(`${this.alias}.lastname`, "ASC")
         .getMany()
   }
 

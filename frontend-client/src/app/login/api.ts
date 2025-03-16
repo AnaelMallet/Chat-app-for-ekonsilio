@@ -1,7 +1,7 @@
 import * as Yup from "yup"
 
 const initialValues = {
-  login:"",
+  login: "",
   password: "",
   isGenius: false
 }

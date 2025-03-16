@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client"
 
-export const getGeniusUsersQuery = gql`
-  query getGeniusUsers {
-    getGeniusUsers {
+export const getOtherUsersQuery = gql`
+  query getOtherUsers {
+    getOtherUsers {
       code
       isSuccess
       errors {
@@ -13,6 +13,7 @@ export const getGeniusUsersQuery = gql`
         uuid
         firstname
         lastname
+        isGenius
       }
     }
   }

@@ -6,10 +6,11 @@ import { UserDomainRepository } from "../../repositories/implementations/userDom
 type geniusUserInfo = {
   uuid: string,
   firstname: string,
-  lastname: string
+  lastname: string,
+  isGenius: boolean
 }
 
-export class GetGeniusUserUseCase implements BasicUseCase {
+export class GetOtherUserUseCase implements BasicUseCase {
   repository: UserDomainRepository
 
   constructor(repository: UserDomainRepository) {
@@ -17,17 +18,18 @@ export class GetGeniusUserUseCase implements BasicUseCase {
   }
 
   async execute(userId: string): Promise<Result<geniusUserInfo[]>> {
-    const allGeniusUserResult = await this.repository.findAllGenius(userId)
-    const geniusUserLists: geniusUserInfo[] = []
+    const allOtherUserResult = await this.repository.findAllOthers(userId)
+    const otherUsersList: geniusUserInfo[] = []
 
-    for (const geniusUser of allGeniusUserResult.getValue()) {
-      geniusUserLists.push({
+    for (const geniusUser of allOtherUserResult.getValue()) {
+      otherUsersList.push({
         uuid: geniusUser.uuid,
         firstname: geniusUser.firstname,
-        lastname: geniusUser.lastname
+        lastname: geniusUser.lastname,
+        isGenius: geniusUser.isGenius
       })
     }
 
-    return Result.ok(geniusUserLists)
+    return Result.ok(otherUsersList)
   }
 }

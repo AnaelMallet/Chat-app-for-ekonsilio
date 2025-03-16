@@ -6,6 +6,7 @@ import { ApolloProvider } from '@apollo/client'
 import NotificationProvider from "../components/notifications/NotificationProvider"
 import UserProvider, { useUser } from "../components/users/userProvider"
 import Sidebar from '../components/sidebar'
+import ChatContainer from '../components/Chat/ChatContainer'
 
 import client from "./graphql-api"
 
@@ -34,6 +35,7 @@ function Home() {
   return (
     <>
       <Sidebar />
+      <ChatContainer />
       <div className="absolute inline space-x-4 right-0 m-5 text-white">
         {!isLogged || !user ?
           <>
