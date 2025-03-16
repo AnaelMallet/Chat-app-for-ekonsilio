@@ -33,8 +33,8 @@ export class UserDomainRepository implements IUserDomainRepository {
       return userTransformer.toDomain(user)
   }
 
-  async findAllGenius(userId: string): Promise<Result<User[]>> {
-      const entityUsers = await this.repository.findAllGenius(userId)
+  async findAllOthers(userId: string): Promise<Result<User[]>> {
+      const entityUsers = await this.repository.findAllOthers(userId)
       const domainUsers = userTransformer.arrayToDomain(entityUsers)
       
       return domainUsers

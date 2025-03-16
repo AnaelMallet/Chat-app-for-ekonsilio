@@ -31,7 +31,7 @@ export class UserTestRepository implements IUserDomainRepository {
     return Promise.resolve(foundUserResult)
   }
 
-  findAllGenius(): Promise<Result<User[]>> {
+  findAllOthers(): Promise<Result<User[]>> {
       const foundGeniusUsers = this.array.filter(user => user.isGenius)
 
       return Promise.resolve(Result.ok(foundGeniusUsers))

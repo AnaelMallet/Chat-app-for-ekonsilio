@@ -5,21 +5,22 @@ import { defaultFieldResolver, GraphQLSchema } from "graphql"
 import { makeExecutableSchema } from "graphql-tools"
 import { mapSchema, MapperKind, getDirective } from "@graphql-tools/utils"
 import jwt, { JwtPayload } from "jsonwebtoken"
+import { Server } from "socket.io"
 
 import { DomainError } from "@shared/domainError"
 import { Result } from "@shared/Results"
 
 import { createDataSource } from "./ormconfig"
 import { getGraphqlAPI } from "./getFiles"
+import { app, server, io } from "./socket"
 
 const main = async () => {
   await createDataSource()
 
-  const app = express()
-
-  app.listen(3001, () => {
+  server.listen(3001, () => {
     console.log("server started on port 3001...")
   })
+
   app.get("/", (_, res) => {
     res.send("hello world !")
   })
@@ -100,7 +101,7 @@ const main = async () => {
   })
 
   await apolloServer.start()
-
+  
   apolloServer.applyMiddleware({ app })
 }
 

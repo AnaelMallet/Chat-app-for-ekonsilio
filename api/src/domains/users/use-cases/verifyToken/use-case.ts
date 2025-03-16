@@ -56,7 +56,7 @@ export class UserVerifyTokenUseCase implements BasicUseCase {
       return Result.ok(newAccessToken)
 
     } else {
-      return Result.ok(user.props.accessToken)
+      return Result.ok()
     }
   }
 }

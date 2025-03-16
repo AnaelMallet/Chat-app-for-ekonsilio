@@ -1,8 +1,10 @@
+import MessageEntity from "src/domains/messages/infra/databases/entities/message"
 import {
   BaseEntity,
   Column, 
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn
 } from "typeorm"
@@ -33,6 +35,12 @@ export default class UserEntity extends BaseEntity {
 
   @Column("text", { nullable: true })
   refreshToken: string
+
+  @OneToMany(() => MessageEntity, message => message.sender)
+  senderMessages: MessageEntity[]
+
+  @OneToMany(() => MessageEntity, message => message.receiver)
+  receiverMessages: MessageEntity[]
 
   @CreateDateColumn()
   createdDate: Date

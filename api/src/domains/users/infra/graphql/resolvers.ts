@@ -5,7 +5,7 @@ import { loginUserController } from "../../use-cases/login"
 import { userVerifyTokenController } from "../../use-cases/verifyToken"
 import { userMeController } from "../../use-cases/me"
 import { updateUserController } from "../../use-cases/updateUser"
-import { getGeniusUserController } from "../../use-cases/getGeniusUsers"
+import { getOtherUserController } from "../../use-cases/getOtherUsers"
 
 const resolvers = {
   Mutation: {
@@ -61,7 +61,7 @@ const resolvers = {
   
       return await userMeController.executeImplementation(props)
     },
-    getGeniusUsers: async (parent: any, args: any, context: any, info: any) => {
+    getOtherUsers: async (parent: any, args: any, context: any, info: any) => {
       const props: graphqlProps = {
         parent,
         args,
@@ -69,7 +69,7 @@ const resolvers = {
         info
       }
 
-      return await getGeniusUserController.executeImplementation(props)
+      return await getOtherUserController.executeImplementation(props)
     }
   }
 }

@@ -1,8 +1,9 @@
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { ApolloQueryResult, OperationVariables, useMutation, useQuery } from "@apollo/client"
+import { io, Socket } from "socket.io-client"
 
-import { getLocalStorage, removeLocalStorage } from "../utils"
+import { getLocalStorage, removeLocalStorage, setLocalStorage } from "../utils"
 import { addNotification, useNotification } from "../notifications/NotificationProvider"
 import client from "../graphql-api"
 
@@ -18,15 +19,14 @@ type User = {
 }
 
 type UserContextType = {
-  accessToken: string | null,
-  setAccessToken: Dispatch<SetStateAction<string | null>>
   isLogged: boolean
-  logout: () => void,
-  user: User | null,
-  userId: string | null,
-  refetch: (variables?: Partial<OperationVariables> | undefined) => Promise<ApolloQueryResult<any>>,
-  setUser: Dispatch<SetStateAction<User | null>>,
+  logout: () => void
+  user: User | null
+  userId: string | null
+  refetch: (variables?: Partial<OperationVariables> | undefined) => Promise<ApolloQueryResult<any>>
+  setUser: Dispatch<SetStateAction<User | null>>
   userContext: any
+  socket: Socket
 }
 
 export const UserContext = createContext<UserContextType>({} as UserContextType)
@@ -36,12 +36,12 @@ export function useUser() {
 }
 
 export default function UserProvider(props: any) {
-  const [ accessToken, setAccessToken ] = useState<string | null>(null)
   const [ userId, setUserId ] = useState<string| null>(null)
   const [ isLogged, setIsLogged ] = useState<boolean>(false)
   const [isLoading , setIsLoading] = useState<boolean>(true)
   const [ user, setUser ] = useState<User | null>(null)
   const [ userContext, setUserContext ] = useState<any>(null)
+  const [ socket, setSocket ] = useState<any>(null)
   const [mutateFunction] = useMutation(verifyTokenMutation, { client })
   const { dispatch } = useNotification()
   const router = useRouter()
@@ -52,9 +52,11 @@ export default function UserProvider(props: any) {
 
   const logout = () => {
     removeLocalStorage("userId")
-    removeLocalStorage("selectedConversationUserId")
+    removeLocalStorage("receiverUserId")
+    removeLocalStorage("token")
     setUserId(null)
     setIsLogged(false)
+    socket.disconnect()
     dispatch(addNotification("Vous êtes déconnecté !", true))
   }
 
@@ -63,6 +65,18 @@ export default function UserProvider(props: any) {
 
     if (userId) {
       setIsLogged(true)
+      
+      if (!socket || !socket.connected) {
+        const socketIO = io("http://localhost:3001", {
+          autoConnect: false,
+          query: {
+            userId
+          }
+        })
+        socketIO.connect()
+
+        setSocket(socketIO)
+      }
     }
   }, [userId])
 
@@ -87,10 +101,9 @@ export default function UserProvider(props: any) {
         const newAccessToken = response.data.verifyToken.values.accessToken
   
         if (newAccessToken !== null) {
-          setAccessToken(() => {
-            return newAccessToken
-          })
+          setLocalStorage("token", newAccessToken)
         }
+
         const interval = setInterval(async () => {
           const response = await mutateFunction({ variables: { userId } })
           const responseErrors = response.data.verifyToken.errors
@@ -110,10 +123,7 @@ export default function UserProvider(props: any) {
           const newAccessToken = response.data.verifyToken.values.accessToken
   
           if (newAccessToken !== null) {
-            setAccessToken(() => {
-              return newAccessToken
-            })
-            
+            setLocalStorage("token", newAccessToken)
           }
         }, 10000)
   
@@ -125,28 +135,36 @@ export default function UserProvider(props: any) {
   }, [dispatch, mutateFunction, router, userId])
 
   useEffect(() => {
-    setUserContext(() => {
-      return {
-        headers: {
-          authorization: `Bearer ${accessToken}`
+    const handleStorage = () => {
+      const accessToken = getLocalStorage("token")
+
+      setUserContext(() => {
+        return {
+          headers: {
+            authorization: `Bearer ${accessToken}`
+          }
         }
-      }
-    })
-  }, [accessToken])
+      })
+    }
+
+    handleStorage()
+    window.addEventListener("storage", handleStorage)
+
+    return () => window.removeEventListener("storage", handleStorage)
+  }, [])
 
   if (loading && isLoading) return <></>
 
   return (
     <UserContext.Provider value={{
-      accessToken,
-      setAccessToken,
       isLogged,
       logout,
       user,
       userId,
       refetch,
       setUser,
-      userContext
+      userContext,
+      socket
     }}>
       {props.children}
     </UserContext.Provider>
