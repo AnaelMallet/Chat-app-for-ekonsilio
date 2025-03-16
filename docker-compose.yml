@@ -1,0 +1,46 @@
+services:
+  api:
+    build:
+      context: api
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    working_dir: /usr/src/app
+    depends_on:
+      - postgres
+    environment:
+      JWT_KEY: 0ZhFgrduv8M1tha164qygCCV2E6n97r5
+      DATABASE_HOST: postgres
+    command: sh -c "yarn install && yarn start"
+
+  frontend-client:
+    build:
+      context: frontend-client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    working_dir: /usr/src/app
+    depends_on:
+      - api
+    command: sh -c "yarn install && yarn start"
+
+  frontend-admin:
+    build:
+      context: frontend-admin
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    working_dir: /usr/src/app
+    depends_on:
+      - api
+    command: sh -c "yarn install && yarn start"
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: chat_app
+      POSTGRES_USER: postgres
